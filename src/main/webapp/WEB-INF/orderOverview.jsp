@@ -14,6 +14,20 @@
 
     <jsp:body>
 
+        <div class="area" >
+            <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div >
 
 
         <c:forEach items="${requestScope.orderArrayList}" var="item">

@@ -15,6 +15,21 @@
 
     <jsp:body>
 
+        <div class="area" >
+            <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div >
+
         <p>An error has occured. This is the best message we can come up
             with right now: </p>
 

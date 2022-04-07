@@ -21,10 +21,35 @@ th, td {
 
 }
 
+@keyframes color {
+    0%   { background-image: url("https://gocook.dk/media/gvypn5s0/oreo_cupcakes-800px.jpg?width=1920&heightratio=0.6666666666666666666666666667&mode=crop&quality=80"); }
+    20%  { background-image: url("https://www.oetker.dk/Recipe/Recipes/oetker.dk/dk-da/baking/image-thumb__101256__RecipeDetailsLightBox/cupcakes-med-regnbue-smoercreme.jpg"); }
+    40%  { background-image: url("https://www.valdemarsro.dk/wp-content/2013/08/marcipanmuffins.jpg")}
+    60%  { background-image: url("https://www.oetker.dk/Recipe/Recipes/oetker.dk/dk-da/baking/image-thumb__75695__RecipeDetailsLightBox/cupcakes-med-nem-frosting.jpg"); }
+    80%  { background-image: url("https://www.amo.dk/siteassets/2.-opskrifter/vanille-cupcake.jpg?maxwidth=1440"); }
+    100% { background-image: url("https://i.pinimg.com/474x/d7/89/98/d7899885ea79e0f9a9ae4c0b70dfd785.jpg"); }
+
+}
 body {
-    background-color: hotpink; !important;
-    background-image: url(/images/5.webp); !important;
-    background-repeat: no-repeat; !important;
+    background-image: url("https://www.valdemarsro.dk/wp-content/2013/08/marcipanmuffins.jpg"); /* Fallback */
+    background-repeat: no-repeat;
+    position: center;
+    animation: color 55s ease-in-out infinite;
+    text-align: center;
+    padding: 2em;
+    background-size: cover;
+    background-position: center;
+}
+
+ {
+    background-attachment: fixed;
+    background-image: url("https://www.valdemarsro.dk/wp-content/2013/08/marcipanmuffins.jpg");
+    width: auto;
+    height: auto;
+    font-family: Arial, Helvetica;
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
 
 }
 

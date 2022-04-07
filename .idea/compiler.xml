@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="startcode" />
         <module name="Cupcake" />
+        <module name="CupcakeV2" />
       </profile>
     </annotationProcessing>
   </component>

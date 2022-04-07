@@ -33,7 +33,7 @@
             </thead>
             <tbody>
         <c:set var="index" value="0"></c:set>
-        <c:set var="fullAmount" value="0"></c:set>
+        <c:set var="fullAmount" scope="session" value="0"></c:set>
         <c:set var="fullCupcakeAmount" value="0"></c:set>
         <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
             <tr>
@@ -54,13 +54,6 @@
             </tr>
             </tfoot>
         </table>
-
-      <%--  <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item">
-            ${item}
-            <br>
-        </c:forEach>--%>
-
-
 
 
     </jsp:body>

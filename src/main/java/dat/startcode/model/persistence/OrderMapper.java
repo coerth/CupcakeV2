@@ -142,7 +142,7 @@ public class OrderMapper implements IOrderMapper {
         {
             try (Connection connection = connectionPool.getConnection()) {
 
-                String sql = "SELECT order_id FROM `order` WHERE customer_id = ? and Date = ?";
+                String sql = "SELECT order_id FROM `order` WHERE customer_id = ? and `date` = ?";
                 int orderID = 0;
 
                 try {
@@ -201,7 +201,7 @@ public class OrderMapper implements IOrderMapper {
 
         int orderID = 0;
 
-        String sql = "insert into order (customer_id, date) values (?,?)";
+        String sql = "insert into `order` (customer_id, date) values (?,?)";
 
 
         try (Connection connection = connectionPool.getConnection()) {
@@ -211,10 +211,10 @@ public class OrderMapper implements IOrderMapper {
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1) {
                     orderID = getOrderID(customerID, localDateTime);
-                }
                 for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList) {
                     result = createrOrderline(cupcakeOrder, orderID);
                     System.out.println("Så blev der indsat en orderline");
+                }
                 }
 
 

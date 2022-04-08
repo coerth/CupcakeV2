@@ -49,7 +49,7 @@ public class ConfirmOrder extends HttpServlet {
             try {
                 if(ordermapper.createOrder(customer.getCustomerID(),cupcakeOrderArrayList, localDateTime)) {
                     request.setAttribute("order", ordermapper.getOrderWithSpecificCustomerIDAndDate(customer.getCustomerID(), localDateTime));
-                    request.getRequestDispatcher("WEB-INF/confirmation.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/orderConfirmed.jsp").forward(request, response);
                 }
             } catch (DatabaseException e) {
                 e.printStackTrace();

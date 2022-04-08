@@ -67,7 +67,7 @@
             </table>
         </c:forEach>
 
-<c
+
 
 
     </jsp:body>

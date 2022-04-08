@@ -47,7 +47,7 @@
         <c:set var="index" value="0"></c:set>
         <c:set var="fullAmount" scope="session" value="0"></c:set>
         <c:set var="fullCupcakeAmount" value="0"></c:set>
-        <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
+        <c:forEach items="${requestScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
             <tr>
                 <th scope="row">${index = index +1}</th>
                 <td ${fullCupcakeAmount = fullCupcakeAmount + item.amount} >${item.amount}</td>

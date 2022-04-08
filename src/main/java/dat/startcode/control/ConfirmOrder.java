@@ -60,12 +60,16 @@ public class ConfirmOrder extends HttpServlet {
 
                 try {
 
-                    int newBalance = customerMapper.updateBalance(orderAmount, customer.getCustomerID());
+                    int newBalance = customerBalance - orderAmount;
                     int orderID = ordermapper.createOrder(customer.getCustomerID(), cupcakeOrderArrayList, localDateTime);
 
+                    customerMapper.updateBalance(newBalance, customer.getCustomerID());
                     customer.setBalance(newBalance);
                     request.setAttribute("orderAmount", orderAmount);
                     request.setAttribute("order", ordermapper.getOrderWithOrderID(orderID));
+                    request.setAttribute("cupcakeOrderArrayList",cupcakeOrderArrayList);
+                    cupcakeOrderArrayList = new ArrayList<>();
+                    session.setAttribute("cupcakeOrderArrayList",cupcakeOrderArrayList);
                     request.getRequestDispatcher("WEB-INF/orderConfirmed.jsp").forward(request, response);
 
 

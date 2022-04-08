@@ -44,7 +44,7 @@ public class CustomerMapper implements ICustomerMapper {
         return customer;
     }
 
-    public int updateBalance(int cost, int customerID) {
+    public void updateBalance(int cost, int customerID) {
         String sql = "UPDATE customer SET balance = ? WHERE customer_id = ?";
         int balance = 0;
 
@@ -65,7 +65,6 @@ public class CustomerMapper implements ICustomerMapper {
             e.printStackTrace();
         }
 
-        return balance;
 
     }
 

@@ -49,6 +49,7 @@ public class OrderHistory extends HttpServlet {
                    request.getRequestDispatcher("WEB-INF/orderOverview.jsp").forward(request,response);
                 }
 
+
                 else
                 {
                     orderArrayList = ordermapper.getOrdersWithSpecificCustomerID(customer.getCustomerID());

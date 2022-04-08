@@ -60,7 +60,7 @@ public class ConfirmOrder extends HttpServlet {
 
                     request.setAttribute("orderAmount",orderAmount);
                     request.setAttribute("order", ordermapper.getOrderWithOrderID(orderID));
-                    request.getRequestDispatcher("WEB-INF/confirmation.jsp").forward(request, response);
+                    request.getRequestDispatcher("WEB-INF/orderConfirmed.jsp").forward(request, response);
 
 
             } catch (DatabaseException e) {

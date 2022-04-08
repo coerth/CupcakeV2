@@ -143,14 +143,14 @@ public class OrderMapper implements IOrderMapper {
             try (Connection connection = connectionPool.getConnection()) {
 
                 String sql = "SELECT order_id FROM `order` WHERE customer_id = ? and `date` = ?";
-                int orderID = 0;
+                int orderID = 2;
 
                 try {
-                    PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    PreparedStatement ps = connection.prepareStatement(sql);
 
                     ps.setInt(1, customerID);
                     ps.setTimestamp(2, Timestamp.valueOf(localDateTime));
-                    int rowsAffected = ps.executeUpdate();
+//                    int rowsAffected = ps.executeUpdate();
                     ResultSet rs = ps.executeQuery();
 
                     if (rs.next()) {
@@ -174,7 +174,7 @@ public class OrderMapper implements IOrderMapper {
             String sql = "INSERT into orderline (amount, topping_id, bottom_id, order_id) values  (?, ?, ? ,?)";
 
             try {
-                PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement ps = connection.prepareStatement(sql);
 
                 ps.setInt(1, cupcakeOrder.getAmount());
                 ps.setInt(2, cupcakeOrder.getTopping().getToppingID());
@@ -182,7 +182,7 @@ public class OrderMapper implements IOrderMapper {
                 ps.setInt(4, orderID);
 
                 int rowsAffected = ps.executeUpdate();
-                ResultSet rs = ps.executeQuery();
+//                ResultSet rs = ps.executeQuery();
                 if (rowsAffected == 1) {
                     result = true;
                     System.out.println("Så blev der indsat en orderline");
@@ -209,6 +209,13 @@ public class OrderMapper implements IOrderMapper {
                 ps.setInt(1, customerID);
                 ps.setTimestamp(2, Timestamp.valueOf(localDateTime));
                 int rowsAffected = ps.executeUpdate();
+      //          ResultSet rs = ps.executeQuery();
+
+
+
+                System.out.println(rowsAffected);
+    //            System.out.println(rs);
+
                 if (rowsAffected == 1) {
                     orderID = getOrderID(customerID, localDateTime);
                 for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList) {

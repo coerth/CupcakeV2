@@ -1,6 +1,7 @@
 package dat.startcode.model.entities;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -8,13 +9,13 @@ public class Order {
 
     int order_id;
     String customerName;
-    Timestamp timestamp;
+    LocalDateTime localDateTime;
     ArrayList<Orderline> orderlineArrayList;
 
-    public Order(int order_id, String customerName, Timestamp timestamp, ArrayList<Orderline> orderlineArrayList)
+    public Order(int order_id, String customerName, LocalDateTime localDateTime, ArrayList<Orderline> orderlineArrayList)
     {
         this.order_id = order_id;
-        this.timestamp = timestamp;
+        this.localDateTime = localDateTime;
         this.orderlineArrayList = orderlineArrayList;
         this.customerName = customerName;
     }
@@ -27,8 +28,8 @@ public class Order {
         return order_id;
     }
 
-    public Timestamp getTimestamp() {
-        return timestamp;
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
     }
 
     public ArrayList<Orderline> getOrderlineArrayList() {

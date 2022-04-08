@@ -68,8 +68,8 @@
         </div>
         <div class="col">
             Giv os et like!<br/>
-            <a class="navbar-brand" href="https://www.facebook.com" >
-                <img src="${pageContext.request.contextPath}/images/1024px-Facebook_Logo_(2019).webp" style="width: 40px"/>
+            <a class="navbar-brand">
+                <img src="${pageContext.request.contextPath}/images/1024px-Facebook_Logo_(2019).webp" style="width: 40px" onclick="window.open('https://www.facebook.com', '_blank')"/>
             </a>
             <a class = "navbar-brand" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <img src="${pageContext.request.contextPath}/images/OnlyFans-Symbol.png" style="width: 40px"/>

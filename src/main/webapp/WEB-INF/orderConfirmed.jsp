@@ -30,6 +30,7 @@
         </div >
 
 
+        Du har nu : ${sessionScope.customer.getbalance()} på din konto!
 
         <table class="table table-striped">
         <thead>
@@ -47,13 +48,13 @@
         <c:set var="fullAmount" scope="session" value="0"></c:set>
         <c:set var="fullCupcakeAmount" value="0"></c:set>
         <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
-        <tr>
-            <th scope="row">${index = index +1}</th>
-            <td ${fullCupcakeAmount = fullCupcakeAmount + item.amount} >${item.amount}</td>
-            <td>${item.bottom.name} (${item.bottom.price}kr.)</td>
-            <td>${item.topping.name} (${item.topping.price}kr.)</td>
-            <td ${fullAmount = fullAmount + item.total}>${item.total}kr.</td>
-        </tr>
+            <tr>
+                <th scope="row">${index = index +1}</th>
+                <td ${fullCupcakeAmount = fullCupcakeAmount + item.amount} >${item.amount}</td>
+                <td>${item.bottom.name} (${item.bottom.price}kr.)</td>
+                <td>${item.topping.name} (${item.topping.price}kr.)</td>
+                <td ${fullAmount = fullAmount + item.total}>${item.total}kr.</td>
+            </tr>
 
         </c:forEach>
 

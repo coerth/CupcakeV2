@@ -30,6 +30,14 @@ public class Customer
                 '}';
     }
 
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
     public int getCustomerID() {
         return customerID;
     }

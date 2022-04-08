@@ -5,6 +5,7 @@ import dat.startcode.model.entities.CupcakeOrder;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
+import dat.startcode.model.persistence.CustomerMapper;
 import dat.startcode.model.persistence.OrderMapper;
 
 import javax.servlet.*;
@@ -36,7 +37,9 @@ public class ConfirmOrder extends HttpServlet {
 
         Customer customer = (Customer) session.getAttribute("customer");
         LocalDateTime localDateTime = LocalDateTime.now();
+        CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
+        int CustomerBalance = customer.getBalance();
 
 
         if (customer == null) {
@@ -49,28 +52,35 @@ public class ConfirmOrder extends HttpServlet {
             ArrayList<CupcakeOrder> cupcakeOrderArrayList = (ArrayList<CupcakeOrder>) session.getAttribute("cupcakeOrderArrayList");
             int orderAmount = 0;
 
-            for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList)
-            {
-                orderAmount += cupcakeOrder.getAmount();
+            for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList) {
+                orderAmount += cupcakeOrder.getTotal();
             }
 
-            try {
+            if (orderAmount > CustomerBalance) {
 
+                try {
 
-                int orderID = ordermapper.createOrder(customer.getCustomerID(),cupcakeOrderArrayList, localDateTime);
+                    int newBalance = customerMapper.updateBalance(orderAmount, customer.getCustomerID());
+                    int orderID = ordermapper.createOrder(customer.getCustomerID(), cupcakeOrderArrayList, localDateTime);
 
-                    request.setAttribute("orderAmount",orderAmount);
+                    customer.setBalance(newBalance);
+                    request.setAttribute("orderAmount", orderAmount);
                     request.setAttribute("order", ordermapper.getOrderWithOrderID(orderID));
                     request.getRequestDispatcher("WEB-INF/orderConfirmed.jsp").forward(request, response);
 
 
-
-            } catch (DatabaseException e) {
-                e.printStackTrace();
+                } catch (DatabaseException e) {
+                    e.printStackTrace();
+                }
+            }else {
+                Logger.getLogger("web").log(Level.SEVERE, "Ikke nok penge på kontoen!");
+                request.setAttribute("errormessage", "Du mangler penge, din fattiglus!");
+                request.getRequestDispatcher("error.jsp").forward(request, response);
             }
         }
 
-    }
+        }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

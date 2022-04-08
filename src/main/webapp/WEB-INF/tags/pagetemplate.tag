@@ -38,6 +38,8 @@
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/login.jsp">Login</a>
                     </c:if>
                     <c:if test="${sessionScope.customer != null }">
+                        ${sessionScope.customer.email}
+                        ${sessionScope.customer.balance}
                         <a class="nav-item nav-link" href="${pageContext.request.contextPath}/logout">Log out</a>
                     </c:if>
                 </div>

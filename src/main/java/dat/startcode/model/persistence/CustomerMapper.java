@@ -7,50 +7,68 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class CustomerMapper implements ICustomerMapper
-{
+public class CustomerMapper implements ICustomerMapper {
     ConnectionPool connectionPool;
 
-    public CustomerMapper(ConnectionPool connectionPool)
-    {
+    public CustomerMapper(ConnectionPool connectionPool) {
         this.connectionPool = connectionPool;
     }
 
     @Override
-    public Customer login(String email, String password) throws DatabaseException
-    {
+    public Customer login(String email, String password) throws DatabaseException {
         Logger.getLogger("web").log(Level.INFO, "");
 
         Customer customer = null;
 
         String sql = "SELECT * FROM customer_view WHERE email = ? AND password = ?";
 
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setString(1, email);
                 System.out.println(email);
                 ps.setString(2, password);
                 ResultSet rs = ps.executeQuery();
-                if (rs.next())
-                {
+                if (rs.next()) {
                     String role = rs.getString("role_name");
                     int customerID = rs.getInt("customer_id");
                     int balance = rs.getInt("balance");
                     customer = new Customer(email, password, role, customerID, balance);
-                } else
-                {
+                } else {
                     throw new DatabaseException("Wrong username or password");
                 }
             }
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             //throw new DatabaseException(ex, "Error logging in. Something went wrong with the database");
             System.out.println(ex);
         }
         return customer;
     }
+
+    public int updateBalance(int cost, int customerID) {
+        String sql = "UPDATE customer SET balance = ? WHERE customer_id = ?";
+        int balance = 0;
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                ps.setInt(1, cost);
+                ps.setInt(2, customerID);
+
+                int rowsAffected = ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+
+                if(rowsAffected == 1) {
+                    balance = rs.getInt(5);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return balance;
+
+    }
+
 
     @Override
     public Customer createCustomer(String email, String password, String role, int balance) throws DatabaseException

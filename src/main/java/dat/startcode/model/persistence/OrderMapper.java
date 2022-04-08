@@ -108,20 +108,18 @@ public class OrderMapper implements IOrderMapper {
         return orderArrayList;
     }
 
-    public Order getOrderWithSpecificCustomerIDAndDate(int customerID, LocalDateTime orderTime) {
-        String sql = "Select * FROM `order` WHERE customer_id = ? and date = ?";
+    public Order getOrderWithOrderID(int orderID) {
+        String sql = "Select * FROM `order` INNER JOIN customer USING(customer_id) WHERE order_id = ?";
 
         Order order = null;
 
         try (Connection connection = connectionPool.getConnection()) {
 
             try (PreparedStatement ps = connection.prepareStatement(sql)) {
-                ps.setInt(1, customerID);
-                ps.setTimestamp(2, Timestamp.valueOf(orderTime));
+                ps.setInt(1, orderID);
 
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    int orderID = rs.getInt("order_id");
                     Timestamp time = rs.getTimestamp("date");
                     LocalDateTime localDateTime = time.toLocalDateTime();
                     String customerName = rs.getString("name");
@@ -196,7 +194,7 @@ public class OrderMapper implements IOrderMapper {
         }
     }
 
-    public boolean createOrder(int customerID, ArrayList<CupcakeOrder> cupcakeOrderArrayList, LocalDateTime localDateTime) throws DatabaseException {
+    public int createOrder(int customerID, ArrayList<CupcakeOrder> cupcakeOrderArrayList, LocalDateTime localDateTime) throws DatabaseException {
         boolean result = false;
 
         int orderID = 0;
@@ -231,7 +229,7 @@ public class OrderMapper implements IOrderMapper {
         } catch (SQLException ex) {
             throw new DatabaseException(ex, "Kunne ikke indsætte ordren i databasen");
         }
-        return result;
+        return orderID;
     }
 
 }

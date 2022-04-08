@@ -69,12 +69,9 @@
             </tfoot>
         </table>
 
-      <%--  <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item">
-            ${item}
-            <br>
-        </c:forEach>--%>
-
-
+        <form action="ConfirmOrder">
+            <input type="submit" value="Bekræft">
+        </form>
 
 
     </jsp:body>

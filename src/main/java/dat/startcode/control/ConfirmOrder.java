@@ -39,7 +39,7 @@ public class ConfirmOrder extends HttpServlet {
         LocalDateTime localDateTime = LocalDateTime.now();
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
-        int CustomerBalance = customer.getBalance();
+        int customerBalance = customer.getBalance();
 
 
         if (customer == null) {
@@ -56,7 +56,7 @@ public class ConfirmOrder extends HttpServlet {
                 orderAmount += cupcakeOrder.getTotal();
             }
 
-            if (orderAmount > CustomerBalance) {
+            if (customerBalance > orderAmount ) {
 
                 try {
 

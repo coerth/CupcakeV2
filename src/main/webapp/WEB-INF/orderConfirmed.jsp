@@ -30,7 +30,7 @@
         </div >
 
 
-        Du har nu : ${sessionScope.customer.getbalance()} på din konto!
+        Du har nu : ${sessionScope.customer.balance} på din konto!
 
         <table class="table table-striped">
         <thead>

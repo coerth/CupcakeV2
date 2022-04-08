@@ -1,8 +1,10 @@
 package dat.startcode.control;
 
 import dat.startcode.model.config.ApplicationStart;
+import dat.startcode.model.entities.CupcakeOrder;
 import dat.startcode.model.entities.Customer;
 import dat.startcode.model.entities.Order;
+import dat.startcode.model.exceptions.DatabaseException;
 import dat.startcode.model.persistence.ConnectionPool;
 import dat.startcode.model.persistence.OrderMapper;
 
@@ -10,6 +12,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,6 +36,8 @@ public class ConfirmOrder extends HttpServlet {
         OrderMapper ordermapper = new OrderMapper(connectionPool);
 
         Customer customer = (Customer) session.getAttribute("customer");
+        LocalDateTime localDateTime = LocalDateTime.now();
+
         if (customer == null) {
 
             Logger.getLogger("web").log(Level.SEVERE, "Bruger ikke logget ind");
@@ -40,7 +45,15 @@ public class ConfirmOrder extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
         else {
-
+            ArrayList<CupcakeOrder> cupcakeOrderArrayList = (ArrayList<CupcakeOrder>) session.getAttribute("cupcakeOrderArrayList");
+            try {
+                if(ordermapper.createOrder(customer.getCustomerID(),cupcakeOrderArrayList, localDateTime)) {
+                    request.setAttribute("order", ordermapper.getOrderWithSpecificCustomerIDAndDate(customer.getCustomerID(), localDateTime));
+                    request.getRequestDispatcher("WEB-INF/confirmation.jsp").forward(request, response);
+                }
+            } catch (DatabaseException e) {
+                e.printStackTrace();
+            }
         }
 
     }

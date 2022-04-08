@@ -108,6 +108,35 @@ public class OrderMapper implements IOrderMapper {
         return orderArrayList;
     }
 
+    public Order getOrderWithSpecificCustomerIDAndDate(int customerID, LocalDateTime orderTime) {
+        String sql = "Select * FROM `order` WHERE customer_id = ? and date = ?";
+
+        Order order = null;
+
+        try (Connection connection = connectionPool.getConnection()) {
+
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1, customerID);
+                ps.setTimestamp(2, Timestamp.valueOf(orderTime));
+
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int orderID = rs.getInt("order_id");
+                    Timestamp time = rs.getTimestamp("date");
+                    LocalDateTime localDateTime = time.toLocalDateTime();
+                    String customerName = rs.getString("name");
+                    ArrayList<Orderline> orderlineArrayList = getAllOrderlines(orderID);
+                    order = new Order(orderID, customerName, localDateTime, orderlineArrayList);
+
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return order;
+    }
+
     public int getOrderID(int customerID, LocalDateTime localDateTime) throws SQLException {
 
         {

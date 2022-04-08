@@ -56,11 +56,13 @@ public class ConfirmOrder extends HttpServlet {
 
             try {
 
+
                 int orderID = ordermapper.createOrder(customer.getCustomerID(),cupcakeOrderArrayList, localDateTime);
 
                     request.setAttribute("orderAmount",orderAmount);
                     request.setAttribute("order", ordermapper.getOrderWithOrderID(orderID));
                     request.getRequestDispatcher("WEB-INF/orderConfirmed.jsp").forward(request, response);
+
 
 
             } catch (DatabaseException e) {

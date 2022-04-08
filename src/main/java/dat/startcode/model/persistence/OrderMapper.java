@@ -205,11 +205,12 @@ public class OrderMapper implements IOrderMapper {
 
 
         try (Connection connection = connectionPool.getConnection()) {
-            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            try (PreparedStatement ps = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 ps.setInt(1, customerID);
                 ps.setTimestamp(2, Timestamp.valueOf(localDateTime));
                 int rowsAffected = ps.executeUpdate();
-      //          ResultSet rs = ps.executeQuery();
+
+                ResultSet rs = ps.getGeneratedKeys();
 
 
 
@@ -217,7 +218,8 @@ public class OrderMapper implements IOrderMapper {
     //            System.out.println(rs);
 
                 if (rowsAffected == 1) {
-                    orderID = getOrderID(customerID, localDateTime);
+                    rs.next();
+                    orderID = rs.getInt(1);
                 for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList) {
                     result = createrOrderline(cupcakeOrder, orderID);
                     System.out.println("Så blev der indsat en orderline");

@@ -57,7 +57,8 @@ public class CustomerMapper implements ICustomerMapper {
 
                 ResultSet rs = ps.getGeneratedKeys();
 
-                if(rowsAffected == 1) {
+                if(rowsAffected == 1)
+                {
                     balance = rs.getInt(5);
                 }
             }

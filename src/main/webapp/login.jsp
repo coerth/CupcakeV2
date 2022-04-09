@@ -33,12 +33,14 @@
         <h3>You can log in here</h3>
 
         <form action="login" method="post">
-            <label for="email">Username: </label>
+            <label for="email">Email: </label>
             <input type="text" id="email" name="email"/>
-            <label for="password">Password: </label>
+            <label for="password">Kodeord: </label>
             <input type="password" id="password" name="password"/>
             <input type="submit"  value="Log in"/>
         </form>
+
+
 
     </jsp:body>
 </t:pagetemplate>

@@ -30,14 +30,28 @@
             </ul>
         </div >
 
-        <h3>You can log in here</h3>
+        <h3>Har du allerede en bruger?<br>Log på her:</h3>
 
         <form action="login" method="post">
             <label for="email">Email: </label>
-            <input type="text" id="email" name="email"/>
+            <input type="text" id="email" name="email"/><br>
             <label for="password">Kodeord: </label>
-            <input type="password" id="password" name="password"/>
+            <input type="password" id="password" name="password"/><br>
             <input type="submit"  value="Log in"/>
+        </form>
+
+        <h3>Ny bruger?<br>Lav din bruger her: </h3>
+
+        <form action="CreateUser" method="post">
+            <label for="newEmail">Email: </label>
+            <input type="text" id="newEmail" name="newEmail"/><br>
+            <label for="newPassword">Kodeord: </label>
+            <input type="password" id="newPassword" name="newPassword"/><br>
+            <label for ="address">Gade: </label>
+            <input type="text" id="address" name="address"/><br>
+            <label for="streetNumber">Vej nr:</label>
+            <input type="text" id="streetNumber" name="streetNumber"><br>
+            <input type="submit"  value="Opret bruger"/>
         </form>
 
 

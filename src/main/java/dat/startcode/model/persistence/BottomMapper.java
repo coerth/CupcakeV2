@@ -44,7 +44,7 @@ public class BottomMapper implements IBottomMapper
             }
         } catch (SQLException ex)
         {
-            throw new DatabaseException(ex, "Fejl under indlæsning af lånere fra databasen");
+            throw new DatabaseException(ex, "Fejl under indlæsning af bunde fra databasen");
         }
 
         return bottomArrayList;

@@ -18,6 +18,8 @@
 
     <jsp:body>
 
+        <c:choose>
+        <c:when test="${sessionScope.cupcakeOrderArrayList.size() > 0}">
         <div class="area" >
             <ul class="circles">
                 <li></li>
@@ -79,6 +81,16 @@
         <form action="ConfirmOrder">
             <input type="submit" value="Bekræft">
         </form>
+
+        </c:when>
+
+        <c:otherwise>
+
+            <h2>Din kurv er tom.</h2>
+            <h3>Se venligst vores store udvalg af cupcakes.</h3>
+
+        </c:otherwise>
+        </c:choose>
 
 
     </jsp:body>

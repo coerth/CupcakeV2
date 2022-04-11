@@ -17,13 +17,17 @@ public class Checkout extends HttpServlet {
        int orderTotal = 0;
        ArrayList<CupcakeOrder> cupcakeOrderArrayList = (ArrayList<CupcakeOrder>) session.getAttribute("cupcakeOrderArrayList");
 
+        if(cupcakeOrderArrayList == null) {
+            cupcakeOrderArrayList = new ArrayList<>();
+        }
+
         for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList)
         {
             orderTotal += cupcakeOrder.getTotal();
         }
 
 
-
+        session.setAttribute("cupcakeOrderArrayList", cupcakeOrderArrayList);
         request.getRequestDispatcher("WEB-INF/shoppingCart.jsp").forward(request, response);
         }
 

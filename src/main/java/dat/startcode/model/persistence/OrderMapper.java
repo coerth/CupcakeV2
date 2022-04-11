@@ -218,6 +218,7 @@ public class OrderMapper implements IOrderMapper {
                 if (rowsAffected == 1) {
                     rs.next();
                     orderID = rs.getInt(1);
+
                 for (CupcakeOrder cupcakeOrder : cupcakeOrderArrayList) {
                     result = createrOrderline(cupcakeOrder, orderID);
                     System.out.println("Så blev der indsat en orderline");

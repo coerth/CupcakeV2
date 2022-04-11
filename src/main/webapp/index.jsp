@@ -15,6 +15,7 @@
     <jsp:body>
 
 
+
         <div class="area" >
             <ul class="circles">
                 <li></li>

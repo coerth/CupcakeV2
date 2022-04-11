@@ -42,6 +42,7 @@
                 <th scope="col">Bund</th>
                 <th scope="col">Topping</th>
                 <th scope="col">Pris</th>
+                <th scope="col">Fjern</th>
 
             </tr>
             </thead>
@@ -50,13 +51,18 @@
         <c:set var="fullAmount" scope="session" value="0"></c:set>
         <c:set var="fullCupcakeAmount" value="0"></c:set>
         <c:forEach items="${sessionScope.cupcakeOrderArrayList}" var="item" varStatus="loop">
+
             <tr>
                 <th scope="row">${index = index +1}</th>
                 <td ${fullCupcakeAmount = fullCupcakeAmount + item.amount} >${item.amount}</td>
                 <td>${item.bottom.name} (${item.bottom.price}kr.)</td>
                 <td>${item.topping.name} (${item.topping.price}kr.)</td>
                 <td ${fullAmount = fullAmount + item.total}>${item.total}kr.</td>
+                    <form>
+                    <td><button type="submit" class="btn btn-outline-danger" value="${index-1}" name="cartItem" id="cardItem" formaction="RemoveCartItem" formmethod="post">X</button></td>
+                </form>
             </tr>
+
 
         </c:forEach>
             </tbody>

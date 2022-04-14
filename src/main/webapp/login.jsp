@@ -43,14 +43,21 @@
         <h3>Ny bruger?<br>Lav din bruger her: </h3>
 
         <form action="CreateUser" method="post">
+            <label for="name">Navn: </label>
+            <input type="text" id="name" name="name"/><br>
             <label for="newEmail">Email: </label>
             <input type="text" id="newEmail" name="newEmail"/><br>
             <label for="newPassword">Kodeord: </label>
             <input type="password" id="newPassword" name="newPassword"/><br>
-            <label for ="address">Gade: </label>
-            <input type="text" id="address" name="address"/><br>
+            <label for ="street">Gade: </label>
+            <input type="text" id="street" name="street"/><br>
             <label for="streetNumber">Vej nr:</label>
             <input type="text" id="streetNumber" name="streetNumber"><br>
+            <label for="zipcode">Postnummer: </label>
+            <input type="text" id="zipcode" name="zipcode"><br>
+            <label for="city">By:</label>
+            <input type="text" id="city" name="city"><br>
+
             <input type="submit"  value="Opret bruger"/>
         </form>
 

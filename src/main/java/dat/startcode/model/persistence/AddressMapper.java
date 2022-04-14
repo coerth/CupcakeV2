@@ -44,7 +44,7 @@ public class AddressMapper implements IAddressMapper{
             }
         } catch (SQLException ex)
         {
-            throw new DatabaseException(ex, "Fejl under indlæsning af zipkoder fra databasen");
+            throw new DatabaseException(ex, "Fejl under indlæsning af postnumre fra databasen");
         }
 
         return addressArrayList;

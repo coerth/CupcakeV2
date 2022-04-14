@@ -71,24 +71,24 @@ public class CustomerMapper implements ICustomerMapper {
 
 
     @Override
-    public Customer createCustomer(String email, String password, String role, int balance) throws DatabaseException
+    public Customer createCustomer(String name,String email, String password,int address_id, int role, int balance) throws DatabaseException
     {
         Logger.getLogger("web").log(Level.INFO, "");
         Customer customer;
-        String sql = "insert into user (username, password, role, balance) values (?,?,?, ?)";
+        String sql = "insert into customer (name, email, password, address_id, 2) values (?,?,?,?,?)";
         try (Connection connection = connectionPool.getConnection())
         {
             try (PreparedStatement ps = connection.prepareStatement(sql))
             {
-                ps.setString(1, email);
-                ps.setString(2, password);
-                ps.setString(3, role);
-                ps.setInt(4, balance);
+                ps.setString(1, name);
+                ps.setString(2, email);
+                ps.setString(3, password);
+                ps.setInt(4, address_id);
                 int rowsAffected = ps.executeUpdate();
                 if (rowsAffected == 1)
                 {
                     int customerID = getCustomerID(email, password);
-                    customer = new Customer(email, password, role, customerID, balance);
+                    customer = new Customer(email, password, 2, customerID, balance);
                 } else
                 {
                     throw new DatabaseException("The user with username = " + email + " could not be inserted into the database");

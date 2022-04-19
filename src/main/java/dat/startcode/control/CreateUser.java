@@ -17,7 +17,7 @@ public class CreateUser extends HttpServlet {
     private ConnectionPool connectionPool;
 
     @Override
-    public void init() throws ServletException{
+    public void init() throws ServletException {
         this.connectionPool = ApplicationStart.getConnectionPool();
     }
 
@@ -45,10 +45,11 @@ public class CreateUser extends HttpServlet {
         int zipcode = Integer.parseInt(request.getParameter("zipcode"));
         String city = request.getParameter("city");
 
-        try {
+        /*try {
             customerMapper.createCustomer(name, email,password,address_id);
         } catch (DatabaseException e) {
             e.printStackTrace();
         }
+    }*/
     }
 }

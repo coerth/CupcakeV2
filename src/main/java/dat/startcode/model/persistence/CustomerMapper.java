@@ -69,7 +69,7 @@ public class CustomerMapper implements ICustomerMapper {
 
     }
 
-
+/*
     @Override
     public Customer createCustomer(String name,String email, String password,int address_id, int role, int balance) throws DatabaseException
     {
@@ -100,7 +100,7 @@ public class CustomerMapper implements ICustomerMapper {
             throw new DatabaseException(ex, "Could not insert username into database");
         }
         return customer;
-    }
+    }*/
 
     public int getCustomerID(String email, String password) throws DatabaseException
     {

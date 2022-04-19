@@ -39,7 +39,6 @@ public class ConfirmOrder extends HttpServlet {
         LocalDateTime localDateTime = LocalDateTime.now();
         CustomerMapper customerMapper = new CustomerMapper(connectionPool);
 
-        int customerBalance = customer.getBalance();
 
 
         if (customer == null) {
@@ -49,6 +48,7 @@ public class ConfirmOrder extends HttpServlet {
             request.getRequestDispatcher("error.jsp").forward(request, response);
         }
         else {
+             int customerBalance = customer.getBalance();
             ArrayList<CupcakeOrder> cupcakeOrderArrayList = (ArrayList<CupcakeOrder>) session.getAttribute("cupcakeOrderArrayList");
             int orderAmount = 0;
 

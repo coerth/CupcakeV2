@@ -44,19 +44,19 @@
 
         <form action="CreateUser" method="post">
             <label for="name">Navn: </label>
-            <input type="text" id="name" name="name"/><br>
+            <input type="text" id="name" name="name" required/><br>
             <label for="newEmail">Email: </label>
-            <input type="text" id="newEmail" name="newEmail"/><br>
+            <input type="text" id="newEmail" name="newEmail" required/><br>
             <label for="newPassword">Kodeord: </label>
-            <input type="password" id="newPassword" name="newPassword"/><br>
+            <input type="password" id="newPassword" name="newPassword" required/><br>
             <label for ="street">Gade: </label>
-            <input type="text" id="street" name="street"/><br>
+            <input type="text" id="street" name="street" required/><br>
             <label for="streetNumber">Vej nr:</label>
-            <input type="text" id="streetNumber" name="streetNumber"><br>
+            <input type="text" id="streetNumber" name="streetNumber" required><br>
             <label for="zipcode">Postnummer: </label>
-            <input type="text" id="zipcode" name="zipcode"><br>
+            <input type="text" id="zipcode" name="zipcode" required><br>
             <label for="city">By:</label>
-            <input type="text" id="city" name="city"><br>
+            <input type="text" id="city" name="city" required><br>
 
             <input type="submit"  value="Opret bruger"/>
         </form>

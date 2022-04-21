@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "CreateUser", value = "/CreateUser")
 public class CreateUser extends HttpServlet {
@@ -40,16 +41,20 @@ public class CreateUser extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("newEmail");
         String password = request.getParameter("newPassword");
-        int address_id = Integer.parseInt(request.getParameter("address"));
+        String street = request.getParameter("street");
         int streetNumber = Integer.parseInt(request.getParameter("streetNumber"));
         int zipcode = Integer.parseInt(request.getParameter("zipcode"));
         String city = request.getParameter("city");
 
-        /*try {
-            customerMapper.createCustomer(name, email,password,address_id);
+        try {
+            System.out.println(customer = customerMapper.createCustomer(name, email, password, street, streetNumber, zipcode, city));
         } catch (DatabaseException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-    }*/
+        request.getRequestDispatcher("login.jsp").forward(request,response);
     }
-}
+
+    }
+

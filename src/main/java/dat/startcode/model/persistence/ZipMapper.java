@@ -1,15 +1,10 @@
 package dat.startcode.model.persistence;
 
-import dat.startcode.model.entities.Bottom;
-import dat.startcode.model.entities.Customer;
-import dat.startcode.model.entities.Topping;
-import dat.startcode.model.entities.Zip;
+import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,36 +17,66 @@ public class ZipMapper implements IZipMapper {
         this.connectionPool = connectionPool;
     }
 
-    public int getSpecificZip(int zipcode, String city) throws DatabaseException
-    {
+    public Zip getSpecificZip(int zipcode) throws DatabaseException, SQLException {
         Logger.getLogger("web").log(Level.INFO, "");
-        Zip zip;
+        Zip zip = null;
         String sql = "SELECT * FROM zip WHERE zipcode = ?";
 
-        int currentZipcode=0;
 
-        try (Connection connection = connectionPool.getConnection())
-        {
-            try (PreparedStatement ps = connection.prepareStatement(sql))
-            {
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
+                ps.setInt(1,zipcode);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int newZipcode = rs.getInt("zipcode");
+                    String city = rs.getString("city");
+                    zip = new Zip(newZipcode, city);
+
+
+                }
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+            return zip;
+        }
+    }
+
+
+    public int createZip(int zipcode, String city) throws DatabaseException {
+
+        int newZip = 0;
+
+        String sql = "insert into `zip` (zipcode, city) values (?,?)";
+
+
+        try (Connection connection = connectionPool.getConnection()) {
+            try (PreparedStatement ps = connection.prepareStatement(sql)) {
                 ps.setInt(1, zipcode);
                 ps.setString(2, city);
-                ResultSet rs = ps.executeQuery();
-                while (rs.next())
-                {
-                    currentZipcode = rs.getInt("zipcode");
+                int rowsAffected = ps.executeUpdate();
+
+
+
+
+                System.out.println(rowsAffected);
+                //            System.out.println(rs);
+
+                if (rowsAffected == 1) {
+
+                    newZip = zipcode;
+
+
+                    System.out.println("Så blev der indsat en newZip " + newZip);
                 }
-                if(currentZipcode == 0)
-                {
-                    throw new DatabaseException("Kunne ikke finde postnr");
-                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        catch (SQLException ex)
-        {
-            throw new DatabaseException(ex, "Could not insert into database");
-        }
-        return currentZipcode;
+            return newZip;
     }
 
 

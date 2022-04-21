@@ -4,9 +4,7 @@ import dat.startcode.model.config.ApplicationStart;
 import dat.startcode.model.entities.Bottom;
 import dat.startcode.model.entities.Topping;
 import dat.startcode.model.exceptions.DatabaseException;
-import dat.startcode.model.persistence.BottomMapper;
-import dat.startcode.model.persistence.ConnectionPool;
-import dat.startcode.model.persistence.ToppingMapper;
+import dat.startcode.model.persistence.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -45,6 +44,11 @@ public class Index extends HttpServlet
             log("bottomArrayList size er: "+bottomArrayList.size()+ " Før database pull");
             log("toppingArrayList size er: "+toppingArrayList.size()+ " Før database pull");
 
+            AddressMapper addressMapper = new AddressMapper(connectionPool);
+            System.out.println(addressMapper.createAddress("Arnesvej", 44, 2860));
+            //ZipMapper zipMapper = new ZipMapper(connectionPool);
+            //System.out.println(zipMapper.createZip(900, "Tørrøvse"));
+
             bottomArrayList = bottomMapper.getAllBottoms();
             toppingArrayList = toppingMapper.getAllToppings();
 
@@ -56,10 +60,9 @@ public class Index extends HttpServlet
 
         } catch (DatabaseException e) {
             e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
-
-
 
 
     }

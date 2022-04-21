@@ -44,6 +44,7 @@
 
         <form action="CreateUser" method="post">
             <label for="name">Navn: </label>
+
             <input type="text" id="name" name="name" required/><br>
             <label for="newEmail">Email: </label>
             <input type="text" id="newEmail" name="newEmail" required/><br>
@@ -57,6 +58,7 @@
             <input type="text" id="zipcode" name="zipcode" required><br>
             <label for="city">By:</label>
             <input type="text" id="city" name="city" required><br>
+
 
             <input type="submit"  value="Opret bruger"/>
         </form>

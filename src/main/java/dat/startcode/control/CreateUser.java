@@ -12,6 +12,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
+
 @WebServlet(name = "CreateUser", value = "/CreateUser")
 public class CreateUser extends HttpServlet {
 
@@ -46,6 +47,7 @@ public class CreateUser extends HttpServlet {
         int zipcode = Integer.parseInt(request.getParameter("zipcode"));
         String city = request.getParameter("city");
 
+
         try {
             System.out.println(customer = customerMapper.createCustomer(name, email, password, street, streetNumber, zipcode, city));
         } catch (DatabaseException e) {
@@ -57,4 +59,7 @@ public class CreateUser extends HttpServlet {
     }
 
     }
+
+
+
 

@@ -1,12 +1,13 @@
 package dat.startcode.model.persistence;
 
 import dat.startcode.model.entities.Address;
-import dat.startcode.model.entities.CupcakeOrder;
-import dat.startcode.model.entities.Zip;
 import dat.startcode.model.exceptions.DatabaseException;
 
-import java.sql.*;
-import java.time.LocalDateTime;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +49,7 @@ public class AddressMapper implements IAddressMapper{
 
         return addressArrayList;
     }
+
 
     public Address getSpecificAddress(String street, int streetNumber, int zipcode) throws DatabaseException, SQLException {
         Logger.getLogger("web").log(Level.INFO, "");

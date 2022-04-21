@@ -1,10 +1,16 @@
 package dat.startcode.model.persistence;
 
-import dat.startcode.model.entities.*;
 import dat.startcode.model.exceptions.DatabaseException;
 
-import java.sql.*;
-import java.time.LocalDateTime;
+
+import dat.startcode.model.entities.Zip;
+import dat.startcode.model.exceptions.DatabaseException;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;

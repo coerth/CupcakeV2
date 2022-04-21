@@ -103,13 +103,16 @@ public class CustomerMapper implements ICustomerMapper {
                 ps.setString(2, email);
                 ps.setString(3, password);
                 ps.setInt(4, address.getAddressID());
+
                 int rowsAffected = ps.executeUpdate();
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rowsAffected == 1)
                 {
+
                     rs.next();
                     int customerID = rs.getInt(1);
                     customer = new Customer(email, password, "kunde", customerID, 0);
+
                 } else
                 {
                     throw new DatabaseException("The user with username = " + email + " could not be inserted into the database");
